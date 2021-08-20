@@ -6,3 +6,7 @@ Shows COVID states from the [DHHS website](https://www.coronavirus.vic.gov.au/vi
 
 ![Screenshot](Screenshot.png)
 
+And there's a widget
+
+![Screenshot](ScreenshotWidget.png)
+

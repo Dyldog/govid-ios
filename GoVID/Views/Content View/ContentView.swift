@@ -16,12 +16,12 @@ struct ContentView: View {
                 if let stats = viewModel.stats {
                     VStack(spacing: 0) {
                         HStack(spacing: 0) {
-                            StatView(backgroundColor: .blue, title: "Active Cases", value: stats.activeCases)
-                            StatView(backgroundColor: .red, title: "Locally Acquired Cases\n(Last 24 Hours)", value: stats.locallyAcquiredCasesLast24Hrs)
+                            StatView(backgroundColor: .blue, title: "Active Cases", value: stats.activeCases, padBottom: false)
+                            StatView(backgroundColor: .red, title: "Locally Acquired Cases\n(Last 24 Hours)", value: stats.locallyAcquiredCasesLast24Hrs, padBottom: false)
                         }
                         HStack(spacing: 0) {
-                            StatView(backgroundColor: .green, title: "Cases Acquired Internationally/In Quarantine\n(Last 24 Hours)", value: stats.internationallyAcquiredAndQuarantinedCases)
-                            StatView(backgroundColor: .orange, title: "Total Lives Lost", value: stats.totalLivesLost)
+                            StatView(backgroundColor: .green, title: "Cases Acquired Internationally/In Quarantine\n(Last 24 Hours)", value: stats.internationallyAcquiredAndQuarantinedCases, padBottom: false)
+                            StatView(backgroundColor: .orange, title: "Total Lives Lost", value: stats.totalLivesLost, padBottom: false)
                         }
                         Text("Data updated \(stats.updated)")
                             .fontWeight(.bold)
