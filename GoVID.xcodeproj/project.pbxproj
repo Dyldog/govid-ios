@@ -36,6 +36,7 @@
 		62043B4D26CF9C3D001EA622 /* GoVID.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = GoVID.entitlements; sourceTree = "<group>"; };
 		62043B5126CFA13B001EA622 /* StatView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatView.swift; sourceTree = "<group>"; };
 		62043B5626CFA162001EA622 /* ViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewModel.swift; sourceTree = "<group>"; };
+		6210020F26CFAC6700806A2A /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -53,6 +54,7 @@
 		62043B2726CF9C00001EA622 = {
 			isa = PBXGroup;
 			children = (
+				6210020F26CFAC6700806A2A /* README.md */,
 				62043B3226CF9C00001EA622 /* GoVID */,
 				62043B3126CF9C00001EA622 /* Products */,
 			);
