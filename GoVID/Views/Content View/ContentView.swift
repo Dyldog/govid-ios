@@ -26,7 +26,6 @@ struct ContentView: View {
                         Text("Data updated \(stats.updated)")
                             .fontWeight(.bold)
                             .padding()
-                            .padding(.bottom, proxy.safeAreaInsets.bottom / 2)
                             .frame(maxWidth: .infinity)
                             .background(Color.purple)
                             .foregroundColor(.white)
@@ -42,9 +41,9 @@ struct ContentView: View {
                     .background(Color.blue)
                 }
             }
-            .edgesIgnoringSafeArea(.all)
+            .edgesIgnoringSafeArea(.top)
             .onTapGesture(count: 3, perform: {
-                /*@START_MENU_TOKEN@*//*@PLACEHOLDER=Code@*/ /*@END_MENU_TOKEN@*/
+                //
             })
         }
     }

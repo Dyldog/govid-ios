@@ -19,6 +19,10 @@
 		62043B5026CF9C66001EA622 /* SwiftSoup in Frameworks */ = {isa = PBXBuildFile; productRef = 62043B4F26CF9C66001EA622 /* SwiftSoup */; };
 		62043B5226CFA13B001EA622 /* StatView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62043B5126CFA13B001EA622 /* StatView.swift */; };
 		62043B5726CFA162001EA622 /* ViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62043B5626CFA162001EA622 /* ViewModel.swift */; };
+		6230290C26DA041A00FCCA9B /* Delta View Model.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6230290B26DA041A00FCCA9B /* Delta View Model.swift */; };
+		6230290E26DA046500FCCA9B /* DeltaView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6230290D26DA046500FCCA9B /* DeltaView.swift */; };
+		6230291126DA0D9C00FCCA9B /* SwiftUICharts in Frameworks */ = {isa = PBXBuildFile; productRef = 6230291026DA0D9C00FCCA9B /* SwiftUICharts */; };
+		6230291526DA127300FCCA9B /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6230291426DA127300FCCA9B /* MainView.swift */; };
 		6286348426CFB25C009FFC9D /* WidgetKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6286348326CFB25C009FFC9D /* WidgetKit.framework */; };
 		6286348626CFB25C009FFC9D /* SwiftUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6286348526CFB25C009FFC9D /* SwiftUI.framework */; };
 		6286348926CFB25C009FFC9D /* GoVID_Widgets.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6286348826CFB25C009FFC9D /* GoVID_Widgets.swift */; };
@@ -71,6 +75,9 @@
 		62043B5126CFA13B001EA622 /* StatView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatView.swift; sourceTree = "<group>"; };
 		62043B5626CFA162001EA622 /* ViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewModel.swift; sourceTree = "<group>"; };
 		6210020F26CFAC6700806A2A /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
+		6230290B26DA041A00FCCA9B /* Delta View Model.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Delta View Model.swift"; sourceTree = "<group>"; };
+		6230290D26DA046500FCCA9B /* DeltaView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeltaView.swift; sourceTree = "<group>"; };
+		6230291426DA127300FCCA9B /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
 		6286348126CFB25C009FFC9D /* GoVID-WidgetsExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = "GoVID-WidgetsExtension.appex"; sourceTree = BUILT_PRODUCTS_DIR; };
 		6286348326CFB25C009FFC9D /* WidgetKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WidgetKit.framework; path = System/Library/Frameworks/WidgetKit.framework; sourceTree = SDKROOT; };
 		6286348526CFB25C009FFC9D /* SwiftUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftUI.framework; path = System/Library/Frameworks/SwiftUI.framework; sourceTree = SDKROOT; };
@@ -87,6 +94,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				62043B5026CF9C66001EA622 /* SwiftSoup in Frameworks */,
+				6230291126DA0D9C00FCCA9B /* SwiftUICharts in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -152,9 +160,11 @@
 		62043B5326CFA147001EA622 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				6230290A26DA040500FCCA9B /* Delta View */,
 				62043B5526CFA15B001EA622 /* Content View */,
 				62043B5126CFA13B001EA622 /* StatView.swift */,
 				62043B4926CF9C15001EA622 /* LoadingSpinner.swift */,
+				6230291426DA127300FCCA9B /* MainView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -182,6 +192,15 @@
 				62043B4726CF9C15001EA622 /* WebLoader.swift */,
 			);
 			path = Utilities;
+			sourceTree = "<group>";
+		};
+		6230290A26DA040500FCCA9B /* Delta View */ = {
+			isa = PBXGroup;
+			children = (
+				6230290B26DA041A00FCCA9B /* Delta View Model.swift */,
+				6230290D26DA046500FCCA9B /* DeltaView.swift */,
+			);
+			path = "Delta View";
 			sourceTree = "<group>";
 		};
 		6286348226CFB25C009FFC9D /* Frameworks */ = {
@@ -224,6 +243,7 @@
 			name = GoVID;
 			packageProductDependencies = (
 				62043B4F26CF9C66001EA622 /* SwiftSoup */,
+				6230291026DA0D9C00FCCA9B /* SwiftUICharts */,
 			);
 			productName = GoVID;
 			productReference = 62043B3026CF9C00001EA622 /* GoVID.app */;
@@ -277,6 +297,7 @@
 			mainGroup = 62043B2726CF9C00001EA622;
 			packageReferences = (
 				62043B4E26CF9C66001EA622 /* XCRemoteSwiftPackageReference "SwiftSoup" */,
+				6230290F26DA0D9C00FCCA9B /* XCRemoteSwiftPackageReference "ChartView" */,
 			);
 			productRefGroup = 62043B3126CF9C00001EA622 /* Products */;
 			projectDirPath = "";
@@ -319,8 +340,11 @@
 				62043B3426CF9C00001EA622 /* AppDelegate.swift in Sources */,
 				62043B4C26CF9C15001EA622 /* LoadingSpinner.swift in Sources */,
 				62043B3626CF9C00001EA622 /* SceneDelegate.swift in Sources */,
+				6230290E26DA046500FCCA9B /* DeltaView.swift in Sources */,
 				62043B3826CF9C00001EA622 /* ContentView.swift in Sources */,
+				6230291526DA127300FCCA9B /* MainView.swift in Sources */,
 				62043B5726CFA162001EA622 /* ViewModel.swift in Sources */,
+				6230290C26DA041A00FCCA9B /* Delta View Model.swift in Sources */,
 				62043B4A26CF9C15001EA622 /* WebLoader.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -483,16 +507,17 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = GoVID/GoVID.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 2;
+				CURRENT_PROJECT_VERSION = 4;
 				DEVELOPMENT_ASSET_PATHS = "\"GoVID/Preview Content\"";
 				DEVELOPMENT_TEAM = 6CW3378X23;
 				ENABLE_PREVIEWS = YES;
 				INFOPLIST_FILE = GoVID/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.1;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.1;
+				MARKETING_VERSION = 1.2;
 				PRODUCT_BUNDLE_IDENTIFIER = com.dylan.GoVID;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTS_MACCATALYST = YES;
@@ -509,16 +534,17 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = GoVID/GoVID.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 2;
+				CURRENT_PROJECT_VERSION = 4;
 				DEVELOPMENT_ASSET_PATHS = "\"GoVID/Preview Content\"";
 				DEVELOPMENT_TEAM = 6CW3378X23;
 				ENABLE_PREVIEWS = YES;
 				INFOPLIST_FILE = GoVID/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.1;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.1;
+				MARKETING_VERSION = 1.2;
 				PRODUCT_BUNDLE_IDENTIFIER = com.dylan.GoVID;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTS_MACCATALYST = YES;
@@ -534,15 +560,16 @@
 				ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME = WidgetBackground;
 				CODE_SIGN_ENTITLEMENTS = "GoVID-WidgetsExtension.entitlements";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 2;
+				CURRENT_PROJECT_VERSION = 4;
 				DEVELOPMENT_TEAM = 6CW3378X23;
 				INFOPLIST_FILE = "GoVID-Widgets/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 14.1;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 					"@executable_path/../../Frameworks",
 				);
-				MARKETING_VERSION = 1.1;
+				MARKETING_VERSION = 1.2;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.dylan.GoVID.GoVID-Widgets";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
@@ -559,15 +586,16 @@
 				ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME = WidgetBackground;
 				CODE_SIGN_ENTITLEMENTS = "GoVID-WidgetsExtension.entitlements";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 2;
+				CURRENT_PROJECT_VERSION = 4;
 				DEVELOPMENT_TEAM = 6CW3378X23;
 				INFOPLIST_FILE = "GoVID-Widgets/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 14.1;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 					"@executable_path/../../Frameworks",
 				);
-				MARKETING_VERSION = 1.1;
+				MARKETING_VERSION = 1.2;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.dylan.GoVID.GoVID-Widgets";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
@@ -618,6 +646,14 @@
 				minimumVersion = 2.3.2;
 			};
 		};
+		6230290F26DA0D9C00FCCA9B /* XCRemoteSwiftPackageReference "ChartView" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/AppPear/ChartView";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.5.5;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -625,6 +661,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 62043B4E26CF9C66001EA622 /* XCRemoteSwiftPackageReference "SwiftSoup" */;
 			productName = SwiftSoup;
+		};
+		6230291026DA0D9C00FCCA9B /* SwiftUICharts */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 6230290F26DA0D9C00FCCA9B /* XCRemoteSwiftPackageReference "ChartView" */;
+			productName = SwiftUICharts;
 		};
 		6286349726CFB2FE009FFC9D /* SwiftSoup */ = {
 			isa = XCSwiftPackageProductDependency;

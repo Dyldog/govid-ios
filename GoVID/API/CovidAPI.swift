@@ -58,6 +58,18 @@ struct CovidStats {
 struct CovidAPI {
     let url = URL(string: "https://www.coronavirus.vic.gov.au/victorian-coronavirus-covid-19-data")!
     let loader = WebLoader()
+    func jsonDecoder(_ dateFormat: String) -> JSONDecoder {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = dateFormat
+        dateFormatter.timeZone = .autoupdatingCurrent
+        let decoder = JSONDecoder()
+        decoder.dateDecodingStrategy = .custom({ decoder in
+            let container = try decoder.singleValueContainer()
+            let dateString = try container.decode(String.self)
+            return dateFormatter.date(from: dateString)!
+        })
+        return decoder
+    }
     
     func load(completion: @escaping (CovidStats) -> Void) {
         loader.load(url: url) { html in
@@ -81,7 +93,134 @@ struct CovidAPI {
         }
     }
     
+    func loadPostcodeData(completion: @escaping () -> Void) {
+        let url = URL(string: "https://discover.data.vic.gov.au/api/3/action/datastore_search?resource_id=e3c72a49-6752-4158-82e6-116bea8f55c8&limit=50000")!
+        let request = URLRequest(url: url)
+        URLSession.shared.dataTask(with: request) { data, response, error in
+            if let error = error {
+                
+            } else if let data = data {
+                do {
+                    let convertedData = try jsonDecoder("dd/MM/yyyy").decode(CovidSuburbCasesResponse.self, from: data)
+                    print(convertedData.result.records.count)
+//                    print(convertedData.result.records)
+                    
+                    let lastDate = convertedData.result.records.map { $0.data_date }.max()!
+                    print(lastDate)
+                    let today = convertedData.result.records.filter { NSCalendar.autoupdatingCurrent.isDate(lastDate, inSameDayAs: $0.data_date) }
+                    let activeCases = today.reduce(0, { return $0 + $1.active.value })
+                    print("Active: \(activeCases)")
+                    
+                    let newCases = today.reduce(0, { return $0 + $1.new.value })
+                    print("New: \(newCases)")
+                    
+                    let allCases = convertedData.result.records.reduce(0, { $0 + $1.new.value })
+                    print("All: \(allCases)")
+                } catch {
+                    print(error)
+                }
+            }
+        }.resume()
+    }
+    
+    func loadAllData(_ completion: @escaping ([(Date, Int)]) -> Void) {
+        let url = URL(string: "https://discover.data.vic.gov.au/api/3/action/datastore_search?resource_id=cc6d89f4-046c-4486-b4a9-63a58fcf9785&limit=50000")!
+        let request = URLRequest(url: url)
+        URLSession.shared.dataTask(with: request) { data, response, error in
+            if let error = error {
+                
+            } else if let data = data {
+                do {
+                    let convertedData = try jsonDecoder("yyyy/MM/dd").decode(CovidAllCasesByAreaResponse.self, from: data)
+                    let counts = convertedData.result.records
+                        .sliced(by: [.year, .month, .day], for: \.diagnosis_date)
+                        .map { ($0.key, $0.value.count )}
+                        .sorted(by: { $0.0 < $1.0 })
+                    completion(counts)
+                } catch {
+                    print(error)
+                }
+            }
+        }.resume()
+    }
+    
     private func mapStatsDict(_ stats: [String: Int], updated: String) throws -> CovidStats {
         return try .init(dict: stats, updated: updated)
     }
+}
+
+protocol StringMappable {
+    static func mapString(_ string: String) -> Self
+}
+
+extension Int: StringMappable {
+    static func mapString(_ string: String) -> Int {
+        return Int(string)!
+    }
+}
+
+extension Float: StringMappable {
+    static func mapString(_ string: String) -> Float {
+        return Float(string)!
+    }
+}
+
+struct MappedString<T: StringMappable & Codable>: Codable {
+    let stringValue: String
+    var value: T { T.mapString(stringValue) }
+    
+    init(from decoder: Decoder) throws {
+        let container = try decoder.singleValueContainer()
+        stringValue = try container.decode(String.self)
+    }
+}
+
+struct CovidSuburbCase: Codable {
+    let _id: Int // 99,
+    let active: MappedString<Int> // "2",
+    let band: MappedString<Int> // "1",
+    let cases: MappedString<Int> // "48",
+    let data_date: Date // "26/08/2021",
+    let new: MappedString<Int> // "0",
+    let population: MappedString<Int>? // "28357",
+    let postcode: String // "3109",
+    let rate: MappedString<Float> // "7.1"
+    
+    //    let file_processed_date : // "27/08/2021",
+}
+
+struct CovidSuburbCasesResponse: Codable {
+    let result: Results
+    
+    struct Results: Codable {
+        let records: [CovidSuburbCase]
+    }
+}
+
+struct CovidAreaCase: Codable {
+    let _id: Int
+    let diagnosis_date: Date
+    let Localgovernmentarea: String
+}
+
+struct CovidAllCasesByAreaResponse: Codable {
+    let result: Results
+    
+    struct Results: Codable {
+        let records: [CovidAreaCase]
+    }
+}
+
+extension Array {
+  func sliced(by dateComponents: Set<Calendar.Component>, for key: KeyPath<Element, Date>) -> [Date: [Element]] {
+    let initial: [Date: [Element]] = [:]
+    let groupedByDateComponents = reduce(into: initial) { acc, cur in
+      let components = Calendar.current.dateComponents(dateComponents, from: cur[keyPath: key])
+      let date = Calendar.current.date(from: components)!
+      let existing = acc[date] ?? []
+      acc[date] = existing + [cur]
+    }
+
+    return groupedByDateComponents
+  }
 }
