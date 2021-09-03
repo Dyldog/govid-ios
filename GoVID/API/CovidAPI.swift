@@ -78,7 +78,8 @@ struct CovidAPI {
                 let statEls = try doc.select(".ch-daily-update__statistics-item-inner")
                 let statsDict = try statEls.reduce(into: [String: Int]()) { dict, el in
                     let text: Array = try el.children().map { try $0.text() }.reversed()
-                    guard let count = Int(text[1]) else { return }
+                    let sanitisedValue = text[1].replacingOccurrences(of: ",", with: "")
+                    guard let count = Int(sanitisedValue) else { return }
                     dict[text[0]] = count
                 }
                 
@@ -155,7 +156,7 @@ protocol StringMappable {
 
 extension Int: StringMappable {
     static func mapString(_ string: String) -> Int {
-        return Int(string)!
+        return Int(string.replacingOccurrences(of: ",", with: ""))!
     }
 }
 
@@ -185,8 +186,6 @@ struct CovidSuburbCase: Codable {
     let population: MappedString<Int>? // "28357",
     let postcode: String // "3109",
     let rate: MappedString<Float> // "7.1"
-    
-    //    let file_processed_date : // "27/08/2021",
 }
 
 struct CovidSuburbCasesResponse: Codable {
